@@ -24,7 +24,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const products = await db.query.productTable.findMany({
     where: eq(productTable.categoryId, category.id),
     with: {
-      variant: true,
+      variants: true,
     },
   });
 

@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 interface ProductItemProps {
   product: typeof productTable.$inferSelect & {
-    variant: (typeof productVariantTable.$inferSelect)[];
+    variants: (typeof productVariantTable.$inferSelect)[];
   };
   textContainerClassname?: string;
 }
@@ -16,7 +16,7 @@ export function ProductItem({
   product,
   textContainerClassname,
 }: ProductItemProps) {
-  const firstVariant = product.variant[0];
+  const firstVariant = product.variants[0];
   return (
     <Link href="/" className="flex flex-col gap-4">
       <Image

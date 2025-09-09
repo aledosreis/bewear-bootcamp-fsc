@@ -11,7 +11,7 @@ import { productTable } from "@/db/schema";
 export default async function Home() {
   const products = await db.query.productTable.findMany({
     with: {
-      variant: true,
+      variants: true,
     },
   });
 
@@ -20,7 +20,7 @@ export default async function Home() {
   const newlyCreatedProducts = await db.query.productTable.findMany({
     orderBy: [desc(productTable.createdAt)],
     with: {
-      variant: true,
+      variants: true,
     },
   });
 

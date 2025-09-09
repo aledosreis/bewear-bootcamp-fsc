@@ -95,7 +95,7 @@ export const productRelations = relations(productTable, ({ one, many }) => ({
     fields: [productTable.categoryId],
     references: [categoryTable.id],
   }),
-  variant: many(productVariantTable),
+  variants: many(productVariantTable),
 }));
 
 export const productVariantTable = pgTable("product_variant", {
@@ -114,7 +114,7 @@ export const productVariantTable = pgTable("product_variant", {
 export const productVariantRelations = relations(
   productVariantTable,
   ({ one }) => ({
-    category: one(productTable, {
+    product: one(productTable, {
       fields: [productVariantTable.productId],
       references: [productTable.id],
     }),
