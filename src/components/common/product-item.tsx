@@ -12,10 +12,7 @@ interface ProductItemProps {
   textContainerClassname?: string;
 }
 
-export function ProductItem({
-  product,
-  textContainerClassname,
-}: ProductItemProps) {
+const ProductItem = ({ product, textContainerClassname }: ProductItemProps) => {
   const firstVariant = product.variants[0];
   return (
     <Link
@@ -47,4 +44,6 @@ export function ProductItem({
       </div>
     </Link>
   );
-}
+};
+
+export default ProductItem;

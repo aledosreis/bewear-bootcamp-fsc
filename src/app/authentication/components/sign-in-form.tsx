@@ -33,7 +33,7 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-export function SignInForm() {
+const SignInForm = () => {
   const router = useRouter();
 
   const form = useForm<FormValues>({
@@ -158,4 +158,6 @@ export function SignInForm() {
       </Card>
     </>
   );
-}
+};
+
+export default SignInForm;

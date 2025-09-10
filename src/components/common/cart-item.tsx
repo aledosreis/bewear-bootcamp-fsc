@@ -14,14 +14,14 @@ interface CartItemProps {
   quantity: number;
 }
 
-export function CartItem({
+const CartItem = ({
   id,
   productName,
   productVariantName,
   productVariantImageUrl,
   productVariantPriceInCents,
   quantity,
-}: CartItemProps) {
+}: CartItemProps) => {
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-4">
@@ -58,4 +58,6 @@ export function CartItem({
       </div>
     </div>
   );
-}
+};
+
+export default CartItem;

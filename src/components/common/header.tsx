@@ -17,7 +17,7 @@ import {
 } from "../ui/sheet";
 import { Cart } from "./cart";
 
-export function Header() {
+export const Header = () => {
   const { data: session } = authClient.useSession();
   return (
     <header className="flex items-center justify-between p-5">
@@ -83,4 +83,4 @@ export function Header() {
       </div>
     </header>
   );
-}
+};

@@ -1,4 +1,4 @@
-export function Footer() {
+const Footer = () => {
   return (
     <div className="bg-accent w-full gap-1 p-8">
       <p className="text-xs font-medium">© 2025 Copyright BEWEAR</p>
@@ -7,4 +7,6 @@ export function Footer() {
       </p>
     </div>
   );
-}
+};
+
+export default Footer;

@@ -5,13 +5,13 @@ import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 
-import { AddToCartButton } from "./add-to-cart-button";
+import AddToCartButton from "./add-to-cart-button";
 
 interface ProductActionsProps {
   productVariantId: string;
 }
 
-export function ProductActions({ productVariantId }: ProductActionsProps) {
+const ProductActions = ({ productVariantId }: ProductActionsProps) => {
   const [quantity, setQuantity] = useState(1);
 
   function handleDecrement() {
@@ -51,4 +51,6 @@ export function ProductActions({ productVariantId }: ProductActionsProps) {
       </div>
     </>
   );
-}
+};
+
+export default ProductActions;

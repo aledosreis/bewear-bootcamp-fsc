@@ -8,10 +8,10 @@ interface VariantSelectorProps {
   variants: (typeof productVariantTable.$inferSelect)[];
 }
 
-export function VariantSelector({
+const VariantSelector = ({
   selectedVariantSlug,
   variants,
-}: VariantSelectorProps) {
+}: VariantSelectorProps) => {
   return (
     <div className="flex items-center gap-4">
       {variants.map((variant) => (
@@ -35,4 +35,6 @@ export function VariantSelector({
       ))}
     </div>
   );
-}
+};
+
+export default VariantSelector;

@@ -1,9 +1,10 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { SignInForm } from "./components/sign-in-form";
-import { SignUpForm } from "./components/sign-up-form";
 import { Header } from "@/components/common/header";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-export default function Authentication() {
+import SignInForm from "./components/sign-in-form";
+import SignUpForm from "./components/sign-up-form";
+
+const Authentication = async () => {
   return (
     <>
       <Header />
@@ -23,4 +24,6 @@ export default function Authentication() {
       </div>
     </>
   );
-}
+};
+
+export default Authentication;

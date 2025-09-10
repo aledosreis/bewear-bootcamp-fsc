@@ -9,7 +9,7 @@ import { auth } from "@/lib/auth";
 
 import { AddProductToCartSchema, addProductToCartSchema } from "./schema";
 
-export async function addProductToCart(data: AddProductToCartSchema) {
+export const addProductToCart = async (data: AddProductToCartSchema) => {
   addProductToCartSchema.parse(data);
   const session = await auth.api.getSession({
     headers: await headers(),
@@ -65,4 +65,4 @@ export async function addProductToCart(data: AddProductToCartSchema) {
     productVariantId: data.productVariantId,
     quantity: data.quantity,
   });
-}
+};

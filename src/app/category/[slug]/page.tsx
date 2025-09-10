@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 
 import { Header } from "@/components/common/header";
-import { ProductItem } from "@/components/common/product-item";
+import ProductItem from "@/components/common/product-item";
 import { db } from "@/db";
 import { categoryTable, productTable } from "@/db/schema";
 
@@ -10,7 +10,7 @@ interface CategoryPageProps {
   params: Promise<{ slug: string }>;
 }
 
-export default async function CategoryPage({ params }: CategoryPageProps) {
+const CategoryPage = async ({ params }: CategoryPageProps) => {
   const { slug } = await params;
 
   const category = await db.query.categoryTable.findFirst({
@@ -45,4 +45,6 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       </div>
     </>
   );
-}
+};
+
+export default CategoryPage;

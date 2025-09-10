@@ -11,10 +11,10 @@ interface AddToCartButtonProps {
   quantity: number;
 }
 
-export function AddToCartButton({
+const AddToCartButton = ({
   productVariantId,
   quantity,
-}: AddToCartButtonProps) {
+}: AddToCartButtonProps) => {
   const queryClient = useQueryClient();
   const { mutate, isPending } = useMutation({
     mutationKey: ["addProductToCart", productVariantId, quantity],
@@ -40,4 +40,6 @@ export function AddToCartButton({
       Adicionar à sacola
     </Button>
   );
-}
+};
+
+export default AddToCartButton;

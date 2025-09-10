@@ -16,10 +16,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "../ui/sheet";
-import { CartItem } from "./cart-item";
+import CartItem from "./cart-item";
 
-export function Cart() {
-  const { data: cart, isPending: cartIsLoading } = useQuery({
+export const Cart = () => {
+  const { data: cart } = useQuery({
     queryKey: ["cart"],
     queryFn: () => getCart(),
   });
@@ -86,4 +86,4 @@ export function Cart() {
       </SheetContent>
     </Sheet>
   );
-}
+};

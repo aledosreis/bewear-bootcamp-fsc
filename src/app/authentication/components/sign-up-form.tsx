@@ -1,13 +1,19 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import z from "zod";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
 } from "@/components/ui/card";
 import {
   Form,
@@ -19,11 +25,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import z from "zod";
 
 const formSchema = z
   .object({
@@ -44,7 +45,7 @@ const formSchema = z
 
 type FormValues = z.infer<typeof formSchema>;
 
-export function SignUpForm() {
+const SignUpForm = () => {
   const router = useRouter();
 
   const form = useForm<FormValues>({
@@ -159,4 +160,6 @@ export function SignUpForm() {
       </Card>
     </>
   );
-}
+};
+
+export default SignUpForm;
