@@ -23,14 +23,21 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { shippingAddressTable } from "@/db/schema";
 import { useCreateShippingAddress } from "@/hooks/mutations/use-create-shipping-address";
 import { useUserAddresses } from "@/hooks/queries/use-user-addresses";
 
-const Addresses = () => {
+interface AddressesProps {
+  shippingAddresses: (typeof shippingAddressTable.$inferSelect)[];
+}
+
+const Addresses = ({ shippingAddresses }: AddressesProps) => {
   const [selectedAddress, setSelectedAddress] = useState<string | null>(null);
 
   const createShippingAddressMutation = useCreateShippingAddress();
-  const { data: shippingAddresses, refetch } = useUserAddresses();
+  const { data: addresses } = useUserAddresses({
+    initialData: shippingAddresses,
+  });
 
   const form = useForm<CreateShippingAddressSchema>({
     resolver: zodResolver(createShippingAddressSchema),
@@ -55,7 +62,6 @@ const Addresses = () => {
       toast.success("Endereço criado com sucesso!");
       form.reset();
       setSelectedAddress(null);
-      refetch();
     } catch (error) {
       toast.error("Erro ao criar endereço. Tente novamente.");
       console.error(error);
@@ -69,7 +75,7 @@ const Addresses = () => {
       </CardHeader>
       <CardContent>
         <RadioGroup value={selectedAddress} onValueChange={setSelectedAddress}>
-          {shippingAddresses?.map((address) => (
+          {addresses?.map((address) => (
             <Card key={address.id}>
               <CardContent>
                 <div className="flex items-start space-x-2">
