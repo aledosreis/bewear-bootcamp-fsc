@@ -32,29 +32,40 @@ export const Cart = () => {
         <SheetHeader>
           <SheetTitle>Carrinho</SheetTitle>
         </SheetHeader>
-        <div className="flex h-full flex-col px-5 pb-6">
-          <div className="flex h-full max-h-full flex-col overflow-hidden">
-            <ScrollArea className="h-full">
-              <div className="flex h-full flex-col gap-8">
-                {cart?.items.map((item) => (
-                  <CartItem
-                    key={item.id}
-                    id={item.id}
-                    productName={item.productVariant.product.name}
-                    productVariantId={item.productVariant.id}
-                    productVariantName={item.productVariant.name}
-                    productVariantImageUrl={item.productVariant.imageUrl}
-                    productVariantPriceInCents={
-                      item.productVariant.priceInCents
-                    }
-                    quantity={item.quantity}
-                  />
-                ))}
-              </div>
-            </ScrollArea>
+        {!cart && (
+          <div className="flex h-full flex-col justify-center gap-3 px-5 pb-6">
+            <p className="font-medium">
+              Faça login para adicionar produtos ao carrinho
+            </p>
+            <Button asChild>
+              <Link href="/authentication">Fazer login</Link>
+            </Button>
           </div>
+        )}
 
-          {cart?.items && cart?.items.length > 0 && (
+        {cart && cart.items.length > 0 ? (
+          <div className="flex h-full flex-col px-5 pb-6">
+            <div className="flex h-full max-h-full flex-col overflow-hidden">
+              <ScrollArea className="h-full">
+                <div className="flex h-full flex-col gap-8">
+                  {cart.items.map((item) => (
+                    <CartItem
+                      key={item.id}
+                      id={item.id}
+                      productName={item.productVariant.product.name}
+                      productVariantId={item.productVariant.id}
+                      productVariantName={item.productVariant.name}
+                      productVariantImageUrl={item.productVariant.imageUrl}
+                      productVariantPriceInCents={
+                        item.productVariant.priceInCents
+                      }
+                      quantity={item.quantity}
+                    />
+                  ))}
+                </div>
+              </ScrollArea>
+            </div>
+
             <div className="flex flex-col gap-4">
               <Separator />
 
@@ -81,8 +92,14 @@ export const Cart = () => {
                 <Link href="/cart/identification">Finalizar compra</Link>
               </Button>
             </div>
-          )}
-        </div>
+          </div>
+        ) : (
+          <div className="flex h-full flex-col justify-center gap-3 px-5 pb-6 text-center">
+            <p className="font-medium">
+              Seu carrinho está vazio. Vamos às compras?
+            </p>
+          </div>
+        )}
       </SheetContent>
     </Sheet>
   );
