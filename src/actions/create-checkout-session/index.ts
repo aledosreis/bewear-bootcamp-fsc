@@ -7,6 +7,7 @@ import Stripe from "stripe";
 import { db } from "@/db";
 import { orderItemTable, orderTable } from "@/db/schema";
 import { auth } from "@/lib/auth";
+import { env } from "@/utils/env";
 
 import {
   CreateCheckoutSessionSchema,
@@ -16,7 +17,7 @@ import {
 export const createCheckoutSession = async (
   data: CreateCheckoutSessionSchema,
 ) => {
-  if (!process.env.STRIPE_SECRET_KEY) {
+  if (!env.STRIPE_SECRET_KEY) {
     throw new Error("Stripe secret key is not set");
   }
   const session = await auth.api.getSession({
@@ -48,12 +49,12 @@ export const createCheckoutSession = async (
     },
   });
 
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  const stripe = new Stripe(env.STRIPE_SECRET_KEY);
   const checkoutSession = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     mode: "payment",
-    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/checkout/success`,
-    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/checkout/cancel`,
+    success_url: `${env.NEXT_PUBLIC_APP_URL}/checkout/success`,
+    cancel_url: `${env.NEXT_PUBLIC_APP_URL}/checkout/cancel`,
     metadata: {
       orderId,
     },
