@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import Footer from "@/components/common/footer";
 import { Header } from "@/components/common/header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { db } from "@/db";
+import { getCartWithItemsFromUser } from "@/data/cart/get";
 import { auth } from "@/lib/auth";
 
 import CartSummary from "../components/cart-summary";
@@ -20,21 +20,7 @@ const ConfirmationPage = async () => {
     redirect("/");
   }
 
-  const cart = await db.query.cartTable.findFirst({
-    where: (cart, { eq }) => eq(cart.userId, session.user.id),
-    with: {
-      shippingAddress: true,
-      items: {
-        with: {
-          productVariant: {
-            with: {
-              product: true,
-            },
-          },
-        },
-      },
-    },
-  });
+  const cart = await getCartWithItemsFromUser(session.user.id);
 
   if (!cart || cart?.items.length === 0) {
     redirect("/");

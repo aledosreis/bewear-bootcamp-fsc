@@ -3,6 +3,7 @@
 import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
 
+import { getCartWithItemsFromUser } from "@/data/cart/get";
 import { db } from "@/db";
 import {
   cartItemTable,
@@ -21,17 +22,7 @@ export const finishOrder = async () => {
     throw new Error("Unauthorized");
   }
 
-  const cart = await db.query.cartTable.findFirst({
-    where: eq(cartTable.userId, session.user.id),
-    with: {
-      shippingAddress: true,
-      items: {
-        with: {
-          productVariant: true,
-        },
-      },
-    },
-  });
+  const cart = await getCartWithItemsFromUser(session.user.id);
 
   if (!cart) {
     throw new Error("Cart not found");
