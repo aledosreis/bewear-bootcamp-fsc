@@ -1,6 +1,7 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
+import Footer from "@/components/common/footer";
 import { Header } from "@/components/common/header";
 import { getOrdersFromUser } from "@/data/order/get";
 import { auth } from "@/lib/auth";
@@ -39,6 +40,10 @@ const MyOrdersPage = async () => {
             })),
           }))}
         />
+      </div>
+
+      <div className="mt-12">
+        <Footer />
       </div>
     </>
   );
